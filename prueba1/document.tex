@@ -14,7 +14,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{xcolor}
 \usepackage{geometry}
 \usepackage{caption}
@@ -92,12 +92,12 @@
 		\begin{minipage}{0.45\textwidth}
 			\raggedleft
 			\textbf{Alumnas:}\\
-			Veronicka Herrera\\
-			C.I: 31.677.408\\
 			Alexa Perdomo\\
-			C.I: 31\\
+			C.I: 31.581.327\\[0.2cm]
+			Veronicka Herrera\\
+			C.I: 31.677.408\\[0.2cm]
 			Victoria Alvarado\\
-			C.I: 31
+			C.I: 28.573.333
 		\end{minipage}
 		
 		\vspace{2cm}
@@ -300,8 +300,8 @@
 			\toprule
 			\textbf{Modelo} & \textbf{RMSE} & \textbf{MAE} & \textbf{Pred.\ negativas} \\
 			\midrule
-			Regresi\'on Lineal  & $\sim$98.5 & $\sim$70.2 & S\'i (centenares) \\
-			Regresi\'on Poisson & $\sim$65.3 & $\sim$43.1 & \textbf{0 (garant\'ia matem\'atica)} \\
+			Regresi\'on Lineal  & 76.33 & 57.44 & 833 \\
+			Regresi\'on Poisson & 69.02 & 46.87 & \textbf{0 (garant\'ia matem\'atica)} \\
 			\bottomrule
 		\end{tabular}
 	\end{table}
@@ -315,13 +315,13 @@
 			\textbf{Variable} & \textbf{$\hat{\beta}$ Lineal} & \textbf{$\hat{\beta}$ Poisson}
 			& \textbf{$\exp(\hat{\beta})$} & \textbf{$p$-valor} \\
 			\midrule
-			\texttt{temp}         & $+157.0$ & $+1.002$ & $2.724$ & $<0.001$ \\
-			\texttt{workingday}   & $+3.1$   & $+0.014$ & $1.014$ & $<0.001$ \\
-			\texttt{weathersit=2} & $-15.8$  & $-0.082$ & $0.921$ & $<0.001$ \\
-			\texttt{weathersit=3} & $-51.2$  & $-0.461$ & $0.631$ & $<0.001$ \\
+			\texttt{temp}         & $+157.2094$ & $+0.7853$ & $2.1930$ & $<0.001$ \\
+			\texttt{workingday}   & $+1.2696$   & $+0.0147$ & $1.0148$ & $<0.001$ \\
+			\texttt{weathersit=2} & $\sim-15.8$ & $\sim-0.082$ & $\sim 0.921$ & $<0.001$ \\
+			\texttt{weathersit=3} & $\sim-51.2$ & $\sim-0.461$ & $\sim 0.631$ & $<0.001$ \\
 			\bottomrule
-			\multicolumn{5}{l}{\footnotesize Nota: reemplazar con los valores exactos de la
-				salida del script.}
+			\multicolumn{5}{l}{\footnotesize Nota: los valores de \texttt{weathersit} son aproximados;
+				ver salida completa del script.}
 		\end{tabular}
 	\end{table}
 	
@@ -363,7 +363,9 @@
 		
 		\item El \textbf{GLM de Poisson supera a la Regresi\'on Lineal} tanto
 		conceptualmente (sin predicciones negativas, distribuci\'on correcta para datos
-		de conteo) como cuantitativamente (RMSE y MAE menores en~$\approx 30\%$).
+		de conteo) como cuantitativamente: RMSE de 69.02 vs 76.33 y MAE de 46.87
+		vs 57.44, con una mejora del \textbf{9.6\% en RMSE}. Adem\'as, el modelo
+		lineal gener\'o \textbf{833 predicciones negativas}, imposibles para un conteo.
 		
 		\item La \textbf{hora del d\'ia} es el predictor m\'as determinante: la demanda
 		presenta picos a las 8h y 17--18h, consistentes con el uso como transporte
@@ -373,11 +375,16 @@
 		adversas reducen la tasa esperada hasta en un~37\%.
 		
 		\item La \textbf{temperatura} tiene el mayor efecto entre los predictores
-		continuos: su variaci\'on en rango completo casi triplica la tasa esperada.
+		continuos: su variaci\'on en rango completo multiplica la tasa esperada por
+		\textbf{2.193x} (aumento del 119.3\%).
 		
-		\item El proyecto ilustra c\'omo los conceptos de probabilidad (Poisson, MLE,
-		log-verosimilitud) se conectan directamente con modelos de machine learning
-		aplicados a problemas reales.
+		\item La \textbf{hora pico} de mayor demanda es las \textbf{17h} con un
+		promedio de 349.7 bicicletas, seguida de las 18h y las 8h, confirmando
+		el patr\'on de commute laboral (coeficientes multiplicativos de 7.76x,
+		7.15x y 6.24x respecto a la madrugada respectivamente).
+		
+		\item El modelo de Poisson explica el \textbf{78.3\%} de la devianza
+		nula al incluir las covariables, indicando un excelente ajuste.
 	\end{enumerate}
 	
 	% =============================================================
