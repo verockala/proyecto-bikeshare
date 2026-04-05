@@ -55,11 +55,7 @@ python proyecto_bikeshare.py
 ```
 proyecto-bikeshare/
 ├── proyecto_bikeshare.py    # Código principal
-├── document.tex             # Informe en LaTeX
 ├── document.pdf             # Informe compilado
-├── eda_bikeshare.png
-├── lm_limitaciones.png
-├── comparacion_modelos.png
 └── README.md
 ```
 
